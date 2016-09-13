@@ -1,0 +1,170 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+<title>Semester i staden</title>
+
+<!--<script data-cfasync="false" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>-->
+<link rel="stylesheet" href="lib/jquery-ui-1.12.0/jquery-ui.css">
+ <link rel="stylesheet" href="lib/jquery-ui-1.12.0/style.css">
+ 
+ <script src="lib/jquery-ui-1.12.0/jquery-1.12.4.js"></script>
+ <script src="lib/jquery-ui-1.12.0/jquery-ui.js"></script>
+
+<!--http://jqueryui.com/slider/-->
+ <script>
+  $( function() {
+    $( "#slider-range-min" ).slider({
+      range: "min",
+      value: 50,
+      min: 0,
+      max: 500,
+      slide: function( event, ui ) {
+        $( "#amount" ).val( ui.value + "kronor" );
+      }
+    });
+    $( "#amount" ).val($( "#slider-range-min" ).slider( "value" ) + "  kronor" );
+  } );
+
+
+  var myRedirect = function(){
+  	window.location="tack.html";
+  }
+
+  </script>
+
+  <style type="text/css">
+  
+    @font-face {
+        font-family: "Maven-pro";
+        src: url("lib/maven-pro/MavenPro-Regular.ttf");
+        }
+
+      h1 {
+        font-family: Maven-pro;
+        color:#251641; 
+        font-size:50px;
+        text-align:center;
+          }
+  
+      h2 {
+        font-family: Maven-pro;
+        color:#251641; 
+        font-size:25px;
+        text-align:center;
+        padding: 3% 3%  3%  3%;
+          }
+
+      img {
+        display: block;
+        margin-top: 60px;
+        margin-left: auto;  
+        margin-bottom: 60px;
+        margin-right: auto;
+          }
+
+      div {
+        width: 85%;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: auto;
+        } 
+
+  </style>
+
+</head>
+
+
+<body bgcolor="#9CDEAE">
+
+<h2 style="margin-top:60px">
+    Tänk dig att du är på semester i en stad...
+    <br/>
+    <br/>
+    Hur mycket skulle du vara villig att betala för att få en guidad tur i staden<br/> via din smartphone, direkt i dina hörlurar?
+ </h2>
+
+<div id="slider-range-min"></div>
+
+<form id="foo">
+	<div>
+		<p>
+		<input type="text" id="amount" name="amount" readonly style="border:0; color:#251641; font-weight:bold; text-align:center; font-family: Maven-pro; font-size: 2em">
+		</p>
+		<p id="result"></p>
+		<input type="submit" value="Spara" style="Maven-pro"/>
+	</div>
+</form>
+
+<script data-cfasync="false" type="text/javascript">
+jQuery( document ).ready(function( $ ) {
+	// variable to hold request
+	var request;
+	// bind to the submit event of our form
+	$("#foo").submit(function(event){
+		// abort any pending request
+		if (request) {
+			request.abort();
+		}
+		// setup some local variables
+		var $form = $(this);
+		// let's select and cache all the fields
+		var $inputs = $form.find("input, select, button, textarea");
+		// serialize the data in the form
+		var serializedData = $form.serialize();
+		// let's disable the inputs for the duration of the ajax request
+		// Note: we disable elements AFTER the form data has been serialized.
+		// Disabled form elements will not be serialized.
+		$inputs.prop("disabled", true);
+		$('#result').text('Sending data...');
+		// fire off the request to /form.php
+		request = $.ajax({
+			// url: "https://script.google.com/macros/s/AKfycbzV--xTooSkBLufMs4AnrCTdwZxVNtycTE4JNtaCze2UijXAg8/exec", // works
+      		url: "https://script.google.com/macros/s/AKfycbwlPcJMRPm9fHpFfkUrh4FbPt5Pjwjf21WOvQa9lpxm5Xg0P8L4/exec",  // clone
+			type: "post",
+			data: serializedData
+		});
+		// callback handler that will be called on success
+		request.done(function (response, textStatus, jqXHR){
+			// log a message to the console
+      		console.log(response, textStatus, jqXHR);
+			/*$('#result').html('<a href="https://docs.google.com/spreadsheets/d/10tt64TiALYhPMqR2fh9JzkuhxW7oC0rXXPb_pmJ7HAY/edit?usp=sharing" target="_blank">Success - see Google Sheet</a>');*/
+			console.log("Hooray, it worked!");
+			
+			
+		});
+		// callback handler that will be called on failure
+		request.fail(function (jqXHR, textStatus, errorThrown){
+			// log the error to the console
+			console.error(
+				"The following error occured: "+
+				textStatus, errorThrown
+			);
+			
+		});
+		// callback handler that will be called regardless
+		// if the request failed or succeeded
+		request.always(function () {
+			// reenable the inputs
+			$inputs.prop("disabled", false);
+			myRedirect();
+		});
+		// prevent default posting of form
+		event.preventDefault();
+	});
+});
+</script>
+</body>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-84072845-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+</html>
