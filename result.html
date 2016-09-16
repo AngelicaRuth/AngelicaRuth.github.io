@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+  
+	<title>Result</title>
+  
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.2.2/Chart.bundle.js"></script>
+  
+	<style type="text/css">  
+	    @font-face {
+	        font-family: "Maven-pro";
+    	    src: url("lib/maven-pro/MavenPro-Regular.ttf");
+    	}
+
+    	h1 {
+    		font-family: Maven-pro;
+        	color:#251641; 
+        	font-size:50px;
+        	text-align:center;
+    	}
+  
+    	h2 {
+    	    font-family: Maven-pro;
+    	    color:#251641; 
+    	    font-size:25px;
+    	    text-align:center;
+    	    padding: 0% 3%  0%  3%;
+    	}
+
+    	p {
+    	    font-family: Maven-pro;
+    	    color:#251641; 
+    	    font-size:22px;
+    	    text-align:center;
+    	    padding: 0% 3%  3%  3%;
+    	}
+    	ul {
+    	    list-style-position:inside;
+    	    font-family: Maven-pro;
+    	    color:#251641; 
+    	    font-size:18px;
+    	    text-align:left;
+    	    padding: 0% 3%  0%  30%;
+    	}
+
+    	img {
+    		display: block;
+        	margin-top: 60px;
+        	margin-left: auto;
+        	margin-bottom: 60px;
+        	margin-right: auto;
+    	}
+
+    	div {
+        	width: 100%;
+        	margin-left: auto;
+        	margin-right: auto;
+        	margin-bottom: auto;
+    	}      
+   </style>
+
+</head>
+
+<body bgcolor="#9CDEAE">
+	<h1>Hypothesis</h1>
+
+	<p>People who receive information on how much an average Swedish household spend on travel, hotels and candy, along with information about how much a visit to the museum costs on average, are more likely to pay more for a service of having a guided audiotour in a city they visit for vacation.</p>
+
+	<h1>Result</h1>
+
+	<h2>Number of people willing to pay a certain amount for the service 
+		</br>together with the Average price they're willing to pay</h2>
+
+	<div>
+		<canvas id="myChart" width="400" height="200"></canvas>
+	</div>
+
+	<ul>
+		<li>154 of respondents uninformed</li>
+		<li>170 of respondents informed (+16)</li>
+		<li>Majority of people answer that they are willing to pay between 51 and 60 SEK</li>
+		<li>31 of the uninformed respondents change to a lower price</li>
+		<li>28 of the informed respondents change to a lower price</li>
+		<li>122 of the uninformed respondents change to a higher price</li>
+		<li>140 of the informed respondents change to a higher price</li>
+	</ul>
+
+	<h2>Unbiased (?)</h2>
+
+	<div>
+		<canvas id="myChart2" width="400" height="200"></canvas>
+	</div>
+
+	<ul>
+		<li>90 of respondents uninformed</li>
+		<li>116 of respondents informed (+26)</li>
+		<li>Majority of people answer that they are willing to pay between 101 and 110 SEK</li>
+		<li>34 of the uninformed respondents change to a lower price</li>
+		<li>35 of the informed respondents change to a lower price</li>
+		<li>55 of the uninformed respondents change to a higher price</li>
+		<li>79 of the informed respondents change to a higher price</li>
+	</ul>
+
+	<h1>Conclusion</h1>
+
+	<ul>
+		<li>Be careful how you design your survey, ask a silly question...</li>
+		<li>The survey aimed to invastigate how people will behave who receive information before they buy something vs. if they don't receive information</li>
+		<li>The fact that the survey involved a default value influenced the outcome</li>
+	</ul>
+
+	<h1>Google Analytics</h1>
+	<img src="image1.png">
+	<img src="image2.png">
+
+	<script>
+		var ctx = document.getElementById("myChart");
+
+		var labels = ["0-10", "11-20", "21-30", "31-40", "41-50", "51-60", "61-70", "71-80", "81-90", "91-100", "101-110", "111-120", "121-130", "131-140", "141-150", "151-160", "161-170", "171-180", "181-190", "191-200", "201-210", "211-220", "221-230", "231-240", "241-250", "251-260", "261-270", "271-280", "281-290", "291-300", "301-310", "311-320", "321-330", "331-340"];
+		
+		var series1 = [6, 7, 10, 8, 1, 64, 2, 3, 2, 6, 19, 0, 1, 3, 3, 4, 0, 0, 2, 4, 5, 0, 1, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+		
+		var series2 = [10, 6, 7, 5, 2, 55, 7, 3, 6, 13, 23, 3, 4, 3, 2, 9, 2, 1, 0, 2, 3, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1];
+		
+		var series3 = [74.8, 74.8, 74.8, 74.8, 74.8, 74.8, 74.8, 74.8, 74.8, 74.8, 74.8, 74.8, 74.8, 74.8, 74.8, 74.8, 74.8, 74.8, 74.8, 74.8, 74.8, 74.8, 74.8, 74.8, 74.8, 74.8, 74.8, 74.8, 74.8, 74.8, 74.8, 74.8, 74.8, 74.8];
+		
+		var series4 = [79.5, 79.5, 79.5, 79.5, 79.5, 79.5, 79.5, 79.5, 79.5, 79.5, 79.5, 79.5, 79.5, 79.5, 79.5, 79.5, 79.5, 79.5, 79.5, 79.5, 79.5, 79.5, 79.5, 79.5, 79.5, 79.5, 79.5, 79.5, 79.5, 79.5, 79.5, 79.5, 79.5, 79.5];
+	
+		var myChart = new Chart(ctx, {
+    		type: 'bar',
+    		data: {
+    			labels: labels,
+    			datasets: [
+    				{
+            			label: "Without information",
+				        hidden: true,
+				        fill: true,
+				        lineTension: 0.5,
+				        backgroundColor: "rgba(43,130,100,0.7)",
+				        borderColor: "rgba(45,92,31,1)",
+				        borderCapStyle: 'butt',
+				        borderDash: [],
+				        borderDashOffset: 0.0,
+				        borderJoinStyle: 'miter',
+				        pointBorderColor: "rgba(45,92,31,1)",
+				        pointBackgroundColor: "rgba(45,92,31,1)",
+				        pointBorderWidth: 1,
+				        pointHoverRadius: 5,
+				        pointHoverBackgroundColor: "rgba(75,192,192,1)",
+				        pointHoverBorderColor: "rgba(220,220,220,1)",
+				        pointHoverBorderWidth: 2,
+				        pointRadius: 1,
+				        pointHitRadius: 10,
+				        data: series1,            
+					},
+					{
+			    	    label: "With information",
+			    	    hidden: true,
+			    	    fill: true,
+			    	    lineTension: 0.1,
+			    	    backgroundColor: "rgba(43,82,130,0.7)",
+			    	    borderColor: "rgba(64,121,191,1)",
+			    	    borderCapStyle: 'butt',
+			    	    borderDash: [],
+			    	    borderDashOffset: 0.0,
+			    	    borderJoinStyle: 'miter',
+			    	    pointBorderColor: "rgba(64,121,191,1)",
+			    	    pointBackgroundColor: "rgba(64,121,191,1)",
+			    	    pointBorderWidth: 1,
+			    	    pointHoverRadius: 5,
+			    	    pointHoverBackgroundColor: "rgba(75,192,192,1)",
+			    	    pointHoverBorderColor: "rgba(220,220,220,1)",
+			    	    pointHoverBorderWidth: 2,
+			    	    pointRadius: 1,
+			    	    pointHitRadius: 10,
+			    	    data: series2,
+			    	    yAxisID: 'y-axis-1',
+					},
+					{
+            			label: "Average Without information",
+			        	hidden: true,
+			        	fill: false,
+			        	type: "line",
+			        	lineTension: 0.5,
+			        	backgroundColor: "rgba(103,130,43,0.4)",
+			        	borderColor: "rgba(45,92,31,1)",
+			        	borderCapStyle: 'butt',
+			        	borderDash: [],
+			        	borderDashOffset: 0.0,
+			        	borderJoinStyle: 'miter',
+			        	pointBorderColor: "rgba(45,92,31,1)",
+			        	pointBackgroundColor: "rgba(45,92,31,1)",
+			       		pointBorderWidth: 1,
+			        	pointHoverRadius: 5,
+			        	pointHoverBackgroundColor: "rgba(75,192,192,1)",
+			        	pointHoverBorderColor: "rgba(220,220,220,1)",
+			        	pointHoverBorderWidth: 2,
+			        	pointRadius: 1,
+			        	pointHitRadius: 10,
+			        	data: series3,
+			        	yAxisID: 'y-axis-2',
+			        	spanGaps: false,    
+					},
+					{
+            			label: "Average With information",
+			        	hidden: true,
+			        	fill: false,
+			        	type: "line",
+			        	lineTension: 0.5,
+			        	backgroundColor: "rgba(121,176,210,0.4)",
+			        	borderColor: "rgba(64,121,191,1)",
+			        	borderCapStyle: 'butt',
+			        	borderDash: [],
+			        	borderDashOffset: 0.0,
+			        	borderJoinStyle: 'miter',
+			        	pointBorderColor: "rgba(64,121,191,1)",
+			        	pointBackgroundColor: "rgba(64,121,191,1)",
+			        	pointBorderWidth: 1,
+			        	pointHoverRadius: 5,
+			        	pointHoverBackgroundColor: "rgba(75,192,192,1)",
+			        	pointHoverBorderColor: "rgba(220,220,220,1)",
+			        	pointHoverBorderWidth: 2,
+			        	pointRadius: 1,
+			        	pointHitRadius: 10,
+			        	data: series4,
+			        	yAxisID: 'y-axis-2',
+			        	spanGaps: false,    
+					},
+    			],
+			},
+
+			options: {
+		    	title: {
+		    		display: false,
+		    		text: "How much would people pay depending on level of information",
+		    		fontSize: 28
+		    	},
+		    	scales: {
+		        	xAxes: [
+		           		{
+                       		stacked: false,
+                       		scaleLabel: {display: true,
+                       		labelString: 'SEK',
+                    		},
+                		}
+                	],
+                	yAxes: [
+                		{
+		                	position: 'left',
+		                	id: 'y-axis-1',
+		                	scaleLabel: {
+		                		display: true,
+		                		labelString: 'Number',
+		                	},
+		                	ticks: {
+		                		min: 0,
+		                		max: 100,
+		                	}
+		            	},
+		            	{
+		                	position: 'right',
+		                	id: 'y-axis-2',
+		                	scaleLabel: {
+		                		display: true,
+		                		labelString: 'SEK',
+		                	},
+		                	ticks: {
+		                		min: 0,
+		                		max: 100,
+		                	}
+		            	},
+		            ]
+		  
+		        }
+			}
+		});
+
+
+		var ctx = document.getElementById("myChart2");
+
+		var labels = ["0-10", "11-20", "21-30", "31-40", "41-50", "51-60", "61-70", "71-80", "81-90", "91-100", "101-110", "111-120", "121-130", "131-140", "141-150", "151-160", "161-170", "171-180", "181-190", "191-200", "201-210", "211-220", "221-230", "231-240", "241-250", "251-260", "261-270", "271-280", "281-290", "291-300", "301-310", "311-320", "321-330", "331-340"];
+
+		var series1 = [9, 7, 10, 8, 1, 0, 2, 3, 2, 6, 19, 0, 1, 3, 3, 1, 0, 0, 2, 4, 5, 0, 1, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+
+		var series2 = [17, 6, 7, 5, 2, 1, 7, 3, 6, 13, 23, 3, 4, 3, 2, 2, 2, 1, 0, 2, 3, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1];
+
+		var series3 = [88.1, 88.1, 88.1, 88.1, 88.1, 88.1, 88.1, 88.1, 88.1, 88.1, 88.1, 88.1, 88.1, 88.1, 88.1, 88.1, 88.1, 88.1, 88.1, 88.1, 88.1, 88.1, 88.1, 88.1, 88.1, 88.1, 88.1, 88.1, 88.1, 88.1, 88.1, 88.1, 88.1, 88.1];
+
+		var series4 = [84.2, 84.2, 84.2, 84.2, 84.2, 84.2, 84.2, 84.2, 84.2, 84.2, 84.2, 84.2, 84.2, 84.2, 84.2, 84.2, 84.2, 84.2, 84.2, 84.2, 84.2, 84.2, 84.2, 84.2, 84.2, 84.2, 84.2, 84.2, 84.2, 84.2, 84.2, 84.2, 84.2, 84.2];
+
+		var myChart2 = new Chart(ctx, {
+    		type: 'bar',
+    		data: {
+    			labels: labels,
+    			datasets: [
+    				{
+            			label: "Without information",
+			            hidden: true,
+			            fill: true,
+			            lineTension: 0.5,
+			            backgroundColor: "rgba(43,130,100,0.7)",
+			            borderColor: "rgba(45,92,31,1)",
+			            borderCapStyle: 'butt',
+			            borderDash: [],
+			            borderDashOffset: 0.0,
+			            borderJoinStyle: 'miter',
+			            pointBorderColor: "rgba(45,92,31,1)",
+			            pointBackgroundColor: "rgba(45,92,31,1)",
+			            pointBorderWidth: 1,
+			            pointHoverRadius: 5,
+			            pointHoverBackgroundColor: "rgba(75,192,192,1)",
+			            pointHoverBorderColor: "rgba(220,220,220,1)",
+			            pointHoverBorderWidth: 2,
+			            pointRadius: 1,
+			            pointHitRadius: 10,
+			            data: series1,
+			            
+					},
+					{
+			            label: "With information",
+			            hidden: true,
+			            fill: true,
+			            lineTension: 0.1,
+			            backgroundColor: "rgba(43,82,130,0.7)",
+			            borderColor: "rgba(64,121,191,1)",
+			            borderCapStyle: 'butt',
+			            borderDash: [],
+			            borderDashOffset: 0.0,
+			            borderJoinStyle: 'miter',
+			            pointBorderColor: "rgba(64,121,191,1)",
+			            pointBackgroundColor: "rgba(64,121,191,1)",
+			            pointBorderWidth: 1,
+			            pointHoverRadius: 5,
+			            pointHoverBackgroundColor: "rgba(75,192,192,1)",
+			            pointHoverBorderColor: "rgba(220,220,220,1)",
+			            pointHoverBorderWidth: 2,
+			            pointRadius: 1,
+			            pointHitRadius: 10,
+			            data: series2,
+			            yAxisID: 'y-axis-1',
+					},
+					{
+            			label: "Average Without information",
+			            hidden: true,
+			            fill: false,
+			            type: "line",
+			            lineTension: 0.5,
+			            backgroundColor: "rgba(103,130,43,0.4)",
+			            borderColor: "rgba(45,92,31,1)",
+			            borderCapStyle: 'butt',
+			            borderDash: [],
+			            borderDashOffset: 0.0,
+			            borderJoinStyle: 'miter',
+			            pointBorderColor: "rgba(45,92,31,1)",
+			            pointBackgroundColor: "rgba(45,92,31,1)",
+			            pointBorderWidth: 1,
+			            pointHoverRadius: 5,
+			            pointHoverBackgroundColor: "rgba(75,192,192,1)",
+			            pointHoverBorderColor: "rgba(220,220,220,1)",
+			            pointHoverBorderWidth: 2,
+			            pointRadius: 1,
+			            pointHitRadius: 10,
+			            data: series3,
+			            yAxisID: 'y-axis-2',
+			            spanGaps: false,
+			            
+					},
+					{
+            			label: "Average With information",
+			            hidden: true,
+			            fill: false,
+			            type: "line",
+			            lineTension: 0.5,
+			            backgroundColor: "rgba(121,176,210,0.4)",
+			            borderColor: "rgba(64,121,191,1)",
+			            borderCapStyle: 'butt',
+			            borderDash: [],
+			            borderDashOffset: 0.0,
+			            borderJoinStyle: 'miter',
+			            pointBorderColor: "rgba(64,121,191,1)",
+			            pointBackgroundColor: "rgba(64,121,191,1)",
+			            pointBorderWidth: 1,
+			            pointHoverRadius: 5,
+			            pointHoverBackgroundColor: "rgba(75,192,192,1)",
+			            pointHoverBorderColor: "rgba(220,220,220,1)",
+			            pointHoverBorderWidth: 2,
+			            pointRadius: 1,
+			            pointHitRadius: 10,
+			            data: series4,
+			            yAxisID: 'y-axis-2',
+			            spanGaps: false,
+			            
+					},
+    			],
+			},
+
+			options: {
+		    	title: {
+		    		display: false,
+		    		text: "How much would people pay depending on level of information unbiased",
+		    		fontSize: 28
+		    	},
+		        scales: {
+		            xAxes: [
+		            	{
+                        	stacked: false,
+                        	scaleLabel: {display: true,
+                        	labelString: 'SEK',
+                    		},
+                		}
+                	],
+                	yAxes: [
+                		{
+		                	position: 'left',
+		                	id: 'y-axis-1',
+		                	scaleLabel: {
+		                		display: true,
+		                		labelString: 'Number',
+		                	},
+		                	ticks: {
+		                		min: 0,
+		                		max: 100,
+		                	}
+		            	},
+		            	{
+		                	position: 'right',
+		                	id: 'y-axis-2',
+		                	scaleLabel: {
+		                		display: true,
+		                		labelString: 'SEK',
+		                	},
+		                	ticks: {
+		                		min: 0,
+		                		max: 100,
+		                	}
+		            	},
+		            ]
+		  
+		        }
+			}
+		});
+
+</script>
+
+</body>
+</html>
